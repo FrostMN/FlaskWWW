@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if not session["logged_in"] %}
+        <div class="modal-login">
+            <div class="login-box">
+                <form method="POST" action="/login">
+                    <input type="text" name="email" placeholder="email" value="admin@devaccount.com"><br>
+                    <input type="password" name="password" placeholder="password" value="admin"><br>
+                    <button type="submit">login</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        {% if section == "home" %}
+            {% for event in events %}
+                {% with event=event, items_url=items_url, key=session_key %}
+                    {% include "event.html" %}
+                {% endwith %}
+            {% else %}
+                no events
+            {% endfor %}
+        {% elif section == "sales" %}
+            <p>on sales page</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

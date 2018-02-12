@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    {% if section == "events" %}
+        {% for event in events %}
+            {% with event=event %}
+                {% include "event.html" %}
+            {% endwith %}
+        {% else %}
+            no events
+        {% endfor %}
+        <div class="events-card" style="border-color: var(--background)">
+            <div class="events-head" style="background-color: var(--background)">
+                <span style="color: var(--background)">|</span>
+                <a style="float: right; color: var(--main-dark-color);" onclick="show_modal('new_event')">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="modal" id="new_event" onload="setTenYears()">
+                <div class="modal-card">
+                    <div class="events-head">
+                        New Event
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                    </div>
+                    <form action="{{ url_for('new_event', key=session['session_key']) }}" method="POST">
+                        <input type="text" name="name" placeholder="Event Name" value="Test Event"><br>
+
+                        <select name="month" onchange="populateDays()" id="month">
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+
+                        <select name="day" id="days">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+
+                        <select name="year">
+                            {% for i in range(11) %}
+                                <option value="{{ this_year + i }}">{{ this_year + i }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <button>save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    {% elif section == "items" %}
+        {% for item in items %}
+            {% with item=item %}
+                {% include "item.html" %}
+            {% endwith %}
+        {% else %}
+            no events
+        {% endfor %}
+        <div class="events-card" style="border-color: var(--background)">
+            <div class="events-head" style="background-color: var(--background)">
+                <span style="color: var(--background)">|</span>
+                <a style="float: right; color: var(--main-dark-color);" onclick="show_modal('new_item')">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="modal" id="new_item">
+                <div class="modal-card">
+                    <div class="events-head">
+                        New Event
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                    </div>
+                    <form action="{{ url_for('new_item', key=session['session_key']) }}" method="POST">
+                        <input type="text" name="name" placeholder="Name" value="Test Item"><br>
+                        <input type="text" name="price" placeholder="price" value="2.00"><br>
+                        <input type="text" name="description" placeholder="Description" value="Test Item with Logo"><br>
+                        <br>
+                        <button type="button" onclick="closeModal(this)">cancel</button>
+                        <button>save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% elif section == "users" %}
+        <p>admin / users page</p>
+        <p>This has not yet been implemented</p>
+    {% endif %}
+
+{% endblock %}

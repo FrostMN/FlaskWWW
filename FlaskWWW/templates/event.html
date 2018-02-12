@@ -1,0 +1,52 @@
+{% if request.path  == "/" %}
+    <div class="events-card">
+        <div class="events-head">
+            {{ event.name }} - {{ event.date | format_date }} <a style="float: right" onclick="toggle_details('event_{{ event.id }}')">+</a>
+        </div>
+        <div class="events-body" id="event_{{ event.id }}" style="display: none">
+            {% for item in event.items %}
+                {% with item = item, event = event, items_url = items_url %}
+                    {% include "item.html" %}
+                {% endwith %}
+            {% else %}
+                no items
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% if request.path  == "/admin" %}
+    <div class="events-card">
+        <div class="events-head">
+            {{ event.name }} - {{ event.date | format_date }}
+            <a style="float: right" onclick="show_modal('delete_{{ event.id }}')"> <i class="fa fa-minus"></i> </a>
+            <a style="float: right; margin-right: 1em;" onclick="show_modal('edit_{{ event.id }}')"> <i class="fa fa-edit"></i> </a>
+        </div>
+        <div class="modal" id="delete_{{ event.id }}">
+            <div class="modal-card">
+                <div class="events-head">
+                    Delete Event - {{ event.name }}
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                </div>
+                Are you sure you want to delete "{{ event.name }}," and all associated sales data?
+                <form action="{{ url_for('delete_event', key=session["session_key"], event_id=event.id) }}" method="post">
+                    <button type="button" onclick="closeModal(this)">no</button>
+                    <button type="submit">yes</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="edit_{{ event.id }}">
+            <div class="modal-card">
+                <div class="events-head">
+                    Edit Event - {{ event.name }}
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{#name          #}
+{#price#}
+{#description#}
+{#creation_time#}
+{#language#}

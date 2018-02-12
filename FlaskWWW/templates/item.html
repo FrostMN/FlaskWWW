@@ -1,0 +1,56 @@
+{% if request.path  == "/" %}
+    <div class="item" id="item_{{ item.id }}">
+        {{ item.name }} |
+        {{ item.description }} |
+        ${{ item.price }} | number sold: <input value="{{ item.sold }}" id="count_{{ event.id }}_{{ item.id }}"> |
+        <button type="button" onclick="updateItemCount({{ event.id }}, {{ item.id }}, '{{ items_url }}', '{{ key }}')">Update</button>
+    </div>
+{% endif %}
+
+{# tep coment out for testing #}
+{#{% if request.path  == "/admin" %}#}
+{#    <div class="item" id="item_{{ item.id }}">#}
+{#        {{ item.name }} |#}
+{#        {{ item.description }} |#}
+{#        ${{ item.price }}#}
+{#    </div>#}
+{#{% endif %}#}
+
+{% if request.path  == "/admin" %}
+    {% if section == "events" %}
+    {% endif %}
+    {% if section == "items" %}
+    <div class="events-card">
+        <div class="events-head">
+            {{ item.name }} |
+            {{ item.description }} |
+            ${{ item.price }}
+            <a style="float: right" onclick="show_modal('delete_{{ item.id }}')"> <i class="fa fa-minus"></i> </a>
+            <a style="float: right; margin-right: 1em;" onclick="show_modal('edit_{{ item.id }}')"> <i class="fa fa-edit"></i> </a>
+        </div>
+        <div class="modal" id="delete_{{ item.id }}">
+            <div class="modal-card">
+                <div class="events-head">
+                    Delete Item - {{  item.name }}
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                </div>
+                Are you sure you want to delete "{{ item.name }}" and all associated sales data?
+                <form action="{{ url_for('delete_item', key=session["session_key"], item_id=item.id) }}" method="post">
+                    <button type="button" onclick="closeModal(this)">no</button>
+                    <button type="submit">yes</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="edit_{{ item.id }}">
+            <div class="modal-card">
+                <div class="events-head">
+                    Edit Item - {{ item.name }}
+                    <a style="float: right" onclick="closeModal(this)">X</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+
+

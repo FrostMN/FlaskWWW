@@ -1,0 +1,48 @@
+<div class="navbar" style="float: left">
+    <div class="dropdown navbtn" style="float: left;">
+        <a href="{{ url_for("home") }}">
+            <i class="fa fa-dollar"></i> {{ title }}
+        </a>
+    </div>
+
+    {% if session["logged_in"] %}
+        {% if request.path  == "/" %}
+
+        {% elif request.path  == "/admin" %}
+            <div class="dropdown navbtn" style="float: left;">
+                <a href="{{ url_for("events") }}">
+                    <i class="fa fa-calendar"></i> Events
+                </a>
+            </div>
+
+            <div class="dropdown navbtn" style="float: left;">
+                <a href="{{ url_for("items") }}">
+                    <i class="fa fa-gift"></i> Items
+                </a>
+            </div>
+
+            <div class="dropdown navbtn" style="float: left;">
+                <a href="{{ url_for("users") }}">
+                    <i class="fa fa-users"></i> Users
+                </a>
+            </div>
+        {% endif  %}
+    {% endif %}
+
+    {% if session["logged_in"] %}
+
+        <div class="dropdown"><!-- style="float: right;"-->
+            <button class="dropbtn">
+                <i class="fa fa-user-circle-o"></i> {{ session["first_name"] }}
+            </button>
+            <div class="dropdown-content"><!-- style="float: right"-->
+                {% if session["admin"] %}
+                    <a href="{{ url_for("home") }}">Sales</a>
+                    <a href="{{ url_for("events") }}">Admin</a>
+                {% endif %}
+                <a href="{{ url_for("logout") }}">Logout</a>
+            </div>
+        </div>
+
+    {% endif %}
+</div>

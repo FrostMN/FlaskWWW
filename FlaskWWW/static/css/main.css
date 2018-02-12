@@ -1,0 +1,320 @@
+:root {
+
+    /*colors*/
+
+    --main-dark-color: #333;
+    --accent-dark-color: #444;
+
+    --main-light-color: #f9f9f9;
+    --accent-light-color: #f1f1f1;
+
+    --main-flash-color: #f1f180;
+
+    --shadow-color: rgba(0,0,0,0.2);
+    --modal-background: rgba(255,255,255,0.5);
+
+
+    --background: var(--main-light-color);
+
+    --card-background: var(--accent-dark-color);
+    --card-border: var(--main-dark-color);
+    --card-accent: var(--main-light-color);
+
+    --nav-background: var(--main-dark-color);
+    --nav-hover-background: var(--accent-dark-color);
+    --nav-text-color: var(--main-light-color);
+
+    --dropdown-background: var(--nav-text-color);
+    --dropdown-hover-backround: var(--accent-light-color);
+    --dropdown-text-color: var(--nav-background);
+
+    /*fonts*/
+
+    --nav-font: Arial, sans-serif;
+
+    /* measurements */
+
+    --dropdown-min: 140px;
+
+
+    --gutter: 10em;
+
+}
+
+body {
+    background-color: var(--background);
+}
+
+.login-box {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 8em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .5em;
+    /*padding-top: 1em;*/
+    /*padding-bottom: 1em;*/
+    width: 16em;
+    background-color: var(--card-background);
+    box-shadow: 0px 8px 16px 0px var(--shadow-color);
+
+    /*border: solid 2px var(--card-border);*/
+}
+
+.login-box input {
+    position: absolute;
+    border: none;
+    background-color: var(--card-accent);
+    left: .5em;
+    right: .5em;
+}
+
+.login-box button {
+    border: none;
+    background-color: var(--card-background);
+    font-family: var(--nav-font);
+    font-weight: bold;
+    color: var(--card-accent);
+    cursor: pointer;
+    float: right;
+    margin-top: .6em;
+    right: 0;
+}
+
+.login-box:hover button {
+    background-color: var(--card-accent);
+    color: var(--card-background);
+    cursor: pointer;
+}
+
+.flash {
+    background-color: var(--main-flash-color);
+    position: absolute;
+    z-index: 5000;
+    left: calc(var(--gutter) / 2);
+    right: calc(var(--gutter) / 2);
+    /*width: 100%;*/
+    padding: 1em;
+}
+
+.flashes {
+    /*margin-top: 1em;*/
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background-color: var(--nav-background);
+    font-family: var(--nav-font);
+}
+
+.navbar a {
+    color: var(--nav-text-color);
+    float: left;
+    z-index: 10;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar .dropdown:first-child {
+    margin-left: calc(var(--gutter) - 1em);
+}
+
+.navbar .dropdown:last-child {
+    margin-right: calc(var(--gutter) - 1em);
+}
+
+.navbtn:hover {
+    background-color: var(--nav-hover-background);
+    z-index: 10;
+}
+
+/*  testing below  */
+
+.dropbtn {
+    background-color: var(--nav-background);
+    color: var(--nav-text-color);
+    font-family: var(--nav-font);
+    /*padding: 16px;*/
+    padding: 14px 16px;
+    z-index: 10;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+    /*float: left;*/
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--dropdown-background);
+    min-width: var(--dropdown-min);
+    box-shadow: 0 8px 16px 0 var(--shadow-color);
+    z-index: 10;
+}
+
+.dropdown-content a {
+    color: var(--dropdown-text-color);
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    min-width: var(--dropdown-min);
+    /*width: 100%;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    text-align: left;
+    z-index: 10;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--dropdown-hover-backround);
+    z-index: 10;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    z-index: 10;
+    right: 0;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--nav-hover-background);
+    z-index: 10;
+}
+
+
+.main {
+    position: absolute;
+    top: 3em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: var(--background);
+    padding: 1em var(--gutter) 0 var(--gutter);
+
+}
+
+.events-card {
+    border: solid 1px var(--main-dark-color);
+    left: 0;
+    right: 0;
+    margin-bottom: 2px;
+}
+
+.main .events-card:last-child {
+    margin-bottom: 0;
+}
+
+.events-head {
+    background-color: var(--main-dark-color);
+    color: var(--main-light-color);
+    padding: .4em;
+}
+
+.events-head span {
+    color: var(--main-dark-color);
+    cursor: default;
+}
+
+.events-head a:hover {
+    cursor: pointer;
+}
+
+.events-body {
+    color: var(--main-dark-color);
+    /*display: none;*/
+    padding: .4em;
+}
+
+.events-body .item:first-child {
+    margin-top: 0;
+    border-bottom: solid 1px var(--main-dark-color);
+}
+
+.events-body .item {
+    margin-top: .4em;
+    padding-bottom: .4em;
+    border-bottom: solid 1px var(--main-dark-color);
+}
+
+.events-body .item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal {
+    display: none;
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background: var(--modal-background);
+    text-align: center;
+
+    z-index: 1000;
+}
+
+.modal-login {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background: var(--modal-background);
+    text-align: center;
+
+    z-index: 1000;
+}
+
+
+.modal-card {
+    position: absolute;
+    top: 3em;
+    left: 3em;
+    right: 3em;
+    height: 20em;
+    width: 45em;
+    display: inline-block;
+    text-align: left;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 120;
+    margin: 3em auto;
+}
+
+/*.modal-card {*/
+    /*position: absolute;*/
+    /*!*display: inline-block;*!*/
+    /*background-color: white;*/
+    /*border: 1px solid black;*/
+    /*z-index: 120;*/
+    /*margin: 3em auto;*/
+
+    /*padding: 1em;*/
+/*}*/

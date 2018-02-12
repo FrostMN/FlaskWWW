@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        {% include "resources.html" %}
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div class="main">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash" id="flashed">
+                        <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>
